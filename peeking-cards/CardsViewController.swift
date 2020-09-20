@@ -23,13 +23,24 @@ class CardsViewController: UIViewController, UICollectionViewDataSource, UIColle
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 2
+        return 3
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         return collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath)
     }
-
+    
+    func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
+        
+        targetContentOffset.pointee = scrollView.contentOffset
+        
+        let flowLayout = collectionView.collectionViewLayout as! CardsCollectionFlowLayout
+        let cellWidthIncludingSpacing = flowLayout.itemSize.width + flowLayout.minimumLineSpacing
+        let offset = targetContentOffset.pointee
+        let selectedIndex = round((offset.x + scrollView.contentInset.left) / cellWidthIncludingSpacing)
+        let selectedIndexPath = IndexPath(row: Int(selectedIndex), section: 0)
+        
+        flowLayout.collectionView!.scrollToItem(at: selectedIndexPath, at: .centeredHorizontally, animated: true)
+    }
 
 }
-

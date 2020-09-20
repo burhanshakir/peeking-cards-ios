@@ -27,4 +27,5 @@ class CardsCollectionFlowLayout: UICollectionViewFlowLayout {
         collectionView.contentInset = UIEdgeInsets(top: 0, left: horizontalInsets, bottom: 0, right: horizontalInsets)
         minimumLineSpacing = horizontalInsets - peekingItemWidth
     }
+    
 }

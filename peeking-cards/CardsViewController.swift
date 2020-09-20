@@ -11,9 +11,16 @@ import UIKit
 class CardsViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate {
     
     private let cellId = "card-cell"
-    private var currentSelectedIndex = 0
+    private let noOfCards = 3
+    
+    private var currentSelectedIndex = 0 {
+        didSet {
+            updateSelectedCardIndicator()
+        }
+    }
     
     @IBOutlet weak var collectionView: UICollectionView!
+    @IBOutlet weak var indicatorView: UIView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,10 +28,12 @@ class CardsViewController: UIViewController, UICollectionViewDataSource, UIColle
         collectionView.delegate = self
         collectionView.dataSource = self
         collectionView.collectionViewLayout = CardsCollectionFlowLayout()
+        
+        showIndicatorView()
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 3
+        return noOfCards
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -63,6 +72,44 @@ class CardsViewController: UIViewController, UICollectionViewDataSource, UIColle
         
         previousSelectedCell?.transformToStandard()
         nextSelectedCell?.transformToLarge()
+    }
+    
+    func showIndicatorView() {
+        
+        let stackView = UIStackView()
+        stackView.axis  = NSLayoutConstraint.Axis.horizontal
+        stackView.distribution  = UIStackView.Distribution.equalSpacing
+        stackView.alignment = UIStackView.Alignment.center
+        stackView.spacing = 8.0
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        
+        for index in 0..<noOfCards {
+            let dot = UIImageView(image: UIImage(systemName: "circle.fill"))
+            
+            dot.heightAnchor.constraint(equalToConstant: 10).isActive = true
+            dot.widthAnchor.constraint(equalToConstant: 10).isActive = true
+            dot.image = dot.image!.withRenderingMode(.alwaysTemplate)
+            dot.tintColor = UIColor.lightGray
+            dot.tag = index + 1
+            
+            if index == currentSelectedIndex {
+                dot.tintColor = UIColor.darkGray
+            }
+            stackView.addArrangedSubview(dot)
+        }
+        
+        indicatorView.subviews.forEach({ $0.removeFromSuperview() })
+        indicatorView.addSubview(stackView)
+        
+        stackView.centerXAnchor.constraint(equalTo: indicatorView.centerXAnchor).isActive = true
+        stackView.centerYAnchor.constraint(equalTo: indicatorView.centerYAnchor).isActive = true
+    }
+    
+    func updateSelectedCardIndicator() {
+        for index in 0...noOfCards - 1 {
+            let selectedIndicator: UIImageView? = indicatorView.viewWithTag(index + 1) as? UIImageView
+            selectedIndicator?.tintColor = index == currentSelectedIndex ? UIColor.darkGray: UIColor.lightGray
+        }
     }
     
 }

@@ -16,7 +16,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Cls-96-4DP">
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Cls-96-4DP">
                                 <rect key="frame" x="0.0" y="323" width="414" height="250"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
@@ -116,17 +116,28 @@
                                     </collectionViewCell>
                                 </cells>
                             </collectionView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="woZ-vb-2UN">
+                                <rect key="frame" x="107" y="581" width="200" height="20"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="20" id="C6c-aG-vIZ"/>
+                                    <constraint firstAttribute="width" constant="200" id="SJE-2b-3BL"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="Cls-96-4DP" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="SHP-qQ-0Wn"/>
                             <constraint firstItem="Cls-96-4DP" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="ZpV-Y6-N5H"/>
+                            <constraint firstItem="woZ-vb-2UN" firstAttribute="top" secondItem="Cls-96-4DP" secondAttribute="bottom" constant="8" id="ckl-cz-Zx3"/>
                             <constraint firstItem="Cls-96-4DP" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="dXY-dn-xHE"/>
+                            <constraint firstItem="woZ-vb-2UN" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="qEl-SE-hom"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <connections>
                         <outlet property="collectionView" destination="Cls-96-4DP" id="uLW-gK-jiZ"/>
+                        <outlet property="indicatorView" destination="woZ-vb-2UN" id="0O0-5S-Umm"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

@@ -9,8 +9,8 @@
 import UIKit
 
 class CardsCollectionFlowLayout: UICollectionViewFlowLayout {
-    private let itemHeight = 180
-    private let itemWidth = 270
+    private let itemHeight = 150
+    private let itemWidth = 225
     
     // The is called to tell the collection view layout object to update the current layout.
     // Layout updates occur the first time the collection view presents its content and whenever the layout is invalidated.

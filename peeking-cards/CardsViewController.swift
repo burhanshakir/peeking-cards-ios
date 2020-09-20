@@ -12,7 +12,7 @@ class CardsViewController: UIViewController, UICollectionViewDataSource, UIColle
     
     private let cellId = "card-cell"
     private var currentSelectedIndex = 0
-
+    
     @IBOutlet weak var collectionView: UICollectionView!
     
     override func viewDidLoad() {
@@ -55,18 +55,16 @@ class CardsViewController: UIViewController, UICollectionViewDataSource, UIColle
         
         flowLayout.collectionView!.scrollToItem(at: selectedIndexPath, at: .centeredHorizontally, animated: true)
         
-        if currentSelectedIndex != selectedIndexPath.row {
-            let previousSelectedIndex = IndexPath(row: Int(currentSelectedIndex), section: 0)
-            let previousSelectedCell = collectionView.cellForItem(at: previousSelectedIndex)
-            let nextSelectedCell = collectionView.cellForItem(at: selectedIndexPath)
-            
-            currentSelectedIndex = selectedIndexPath.row
-            
-            previousSelectedCell?.transformToStandard()
-            nextSelectedCell?.transformToLarge()
-        }
+        let previousSelectedIndex = IndexPath(row: Int(currentSelectedIndex), section: 0)
+        let previousSelectedCell = collectionView.cellForItem(at: previousSelectedIndex)
+        let nextSelectedCell = collectionView.cellForItem(at: selectedIndexPath)
+        
+        currentSelectedIndex = selectedIndexPath.row
+        
+        previousSelectedCell?.transformToStandard()
+        nextSelectedCell?.transformToLarge()
     }
-
+    
 }
 
 extension UICollectionViewCell {
@@ -81,5 +79,5 @@ extension UICollectionViewCell {
             self.transform = CGAffineTransform.identity
         }
     }
-
+    
 }

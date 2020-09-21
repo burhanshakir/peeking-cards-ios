@@ -118,7 +118,7 @@
                             </collectionView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="woZ-vb-2UN">
                                 <rect key="frame" x="107" y="581" width="200" height="20"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="20" id="C6c-aG-vIZ"/>
                                     <constraint firstAttribute="width" constant="200" id="SJE-2b-3BL"/>

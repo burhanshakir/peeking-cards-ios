@@ -12,7 +12,7 @@ class CardsCollectionFlowLayout: UICollectionViewFlowLayout {
     private let itemHeight = 150
     private let itemWidth = 225
     
-    // The is called to tell the collection view layout object to update the current layout.
+    // The prepare() methodis called to tell the collection view layout object to update the current layout.
     // Layout updates occur the first time the collection view presents its content and whenever the layout is invalidated.
 
     override func prepare() {

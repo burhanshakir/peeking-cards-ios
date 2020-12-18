@@ -54,13 +54,38 @@ class CardsViewController: UIViewController, UICollectionViewDataSource, UIColle
     
     func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
         
+        guard scrollView == collectionView else {
+            return
+        }
+        
         targetContentOffset.pointee = scrollView.contentOffset
         
         let flowLayout = collectionView.collectionViewLayout as! CardsCollectionFlowLayout
         let cellWidthIncludingSpacing = flowLayout.itemSize.width + flowLayout.minimumLineSpacing
         let offset = targetContentOffset.pointee
-        let selectedIndex = round((offset.x + scrollView.contentInset.left) / cellWidthIncludingSpacing)
-        let selectedIndexPath = IndexPath(row: Int(selectedIndex), section: 0)
+        let horizontalVelocity = velocity.x
+        
+        var selectedIndex = currentSelectedIndex
+        
+        switch horizontalVelocity {
+        // On swiping
+        case _ where horizontalVelocity > 0 :
+            selectedIndex = currentSelectedIndex + 1
+        case _ where horizontalVelocity < 0:
+            selectedIndex = currentSelectedIndex - 1
+            
+        // On dragging
+        case _ where horizontalVelocity == 0:
+            let index = (offset.x + scrollView.contentInset.left) / cellWidthIncludingSpacing
+            let roundedIndex = round(index)
+            
+            selectedIndex = Int(roundedIndex)
+        default:
+            print("Incorrect velocity for collection view")
+        }
+        
+        let safeIndex = max(0, min(selectedIndex, noOfCards - 1))
+        let selectedIndexPath = IndexPath(row: safeIndex, section: 0)
         
         flowLayout.collectionView!.scrollToItem(at: selectedIndexPath, at: .centeredHorizontally, animated: true)
         
